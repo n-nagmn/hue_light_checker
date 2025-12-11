@@ -14,7 +14,7 @@ from hue_entertainment_pykit import Bridge, Discovery, Entertainment, Streaming,
 
 def main():
     """
-    Philips HueのライトIDを簡単に確認するツール【default.ini対応版】
+    Philips HueのライトIDを簡単に確認するツールです。
     入力されたIDのライトを1秒間だけ青く光らせます。
     """
     print("\n--- Hue Light ID Checker (default.ini Ver.) ---")
@@ -109,7 +109,7 @@ def main():
         
         # --- IDテストのメインループ ---
         while True:
-            prompt = f"\n💡 テストしたいライトのID (0-{num_lights_in_area - 1}) を入力してください ('q'で終了): "
+            prompt = f"\n テストしたいライトのID (0-{num_lights_in_area - 1}) を入力してください ('q'で終了): "
             user_input_id = input(prompt)
 
             if user_input_id.lower() == 'q':
@@ -118,14 +118,14 @@ def main():
             try:
                 light_id = int(user_input_id)
                 if not (0 <= light_id < num_lights_in_area):
-                    print(f"   => ❌ IDは 0 から {num_lights_in_area - 1} の範囲で入力してください。")
+                    print(f"   => IDは 0 から {num_lights_in_area - 1} の範囲で入力してください。")
                     continue
             except ValueError:
-                print("   => ❌ 数値を入力してください。")
+                print("   => 数値を入力してください。")
                 continue
 
             # 選択されたライトを1秒間、青で点灯させる
-            print(f"   => ✅ Light ID {light_id} を1秒間、青色で点灯します...")
+            print(f"   => Light ID {light_id} を1秒間、青色で点灯します...")
             streaming_session.set_input((0, 0, 255, light_id))  # 青色で点灯 (R, G, B, LightID)
             sleep(1)  # 1秒待つ
             streaming_session.set_input((0, 0, 0, light_id))   # 消灯
