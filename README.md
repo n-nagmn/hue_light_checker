@@ -13,7 +13,7 @@ Philips Hueの「エンターテイメントエリア」に登録されている
 ## 必要要件
 
   * Python 3.x
-  * [hue-entertainment-pykit](https://www.google.com/search?q=https://github.com/phue/hue-entertainment-pykit)
+  * [hue-entertainment-pykit](https://github.com/hrdasdominik/hue-entertainment-pykit)
 
 ### インストール
 
