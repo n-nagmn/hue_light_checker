@@ -72,12 +72,20 @@ def main():
         # 直接接続が失敗したか、キーがない場合は自動検索と認証を行う
         if my_bridge is None:
             discovery = Discovery()
+            attempt = 0
             while my_bridge is None:
+                attempt += 1
+                # discover_bridges(ip_address=...)は指定IPへの直接アクセスのみを試し、
+                # mDNSでの全体スキャンをしない。default.iniのBridgeIpが古くなっている
+                # (DHCPでIPが変わった等)場合、指定し続けると全体スキャンへ絶対に
+                # 切り替わらず、永久に見つからなくなる。最初の2回だけヒントとして
+                # 使い、以降は全体スキャンへ切り替える。
+                query_ip = bridge_ip if (bridge_ip and attempt <= 2) else None
                 print("ネットワーク上のHueブリッジを検索・認証します...")
-                bridges = discovery.discover_bridges(ip_address=bridge_ip)
+                bridges = discovery.discover_bridges(ip_address=query_ip)
                 if bridges:
                     my_bridge = list(bridges.values())[0]
-                    break 
+                    break
                 else:
                     print("\nブリッジの認証に失敗しました。Hueブリッジ本体のリンクボタンを押してください。")
                     print("15秒後に再試行します...")

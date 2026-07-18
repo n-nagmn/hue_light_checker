@@ -44,7 +44,7 @@ Clientkey =
 
 1.  スクリプトを実行します。
     ```bash
-    python hue_light_id_checker.py
+    python hue_light_checker.py
     ```
 2.  初回接続時は、コンソールの指示に従って **Hueブリッジ本体のリンクボタン** を押してください。
 3.  接続が成功すると、そのエリアに含まれるライトの数が表示されます。
